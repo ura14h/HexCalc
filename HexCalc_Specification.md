@@ -30,7 +30,7 @@ html body h3 {
 
 これは [16進電卓](https://itunes.apple.com/jp/app/16進電卓/id335773208?mt=8) のキー入力制御に関する仕様メモです。
 
-## 1. 画面レイアウト
+## 1. 画面レイアウト
 
 ![16進電卓の画面レイアウト](Screen_Shot.png) 
 
@@ -46,7 +46,7 @@ html body h3 {
 | **クリアキー**     | `C` (赤色) |
 | **全クリアキー**   | `AC` |
 
-## 2. 状態遷移図
+## 2. 状態遷移図
 
 ### 2.1 キー入力全体
 
@@ -102,7 +102,7 @@ state "Cモード" as c_mode
 
 [*] --> ac_mode
 ac_mode -> c_mode: 数字
-c_mode -> ac_mode: 全クリア
+c_mode -> ac_mode: 全クリア
 
 @enduml
 ```
