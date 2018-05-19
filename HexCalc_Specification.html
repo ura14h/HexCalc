@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>HexCalc_Specification</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <style>
+html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview {
+    left: 0 !important;
+    transform: none !important;
+}
+html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+    padding: 2em !important;
+}
+html body table {
+    font-size: 88% !important;
+}
+html body h1 {
+    border-bottom: 2pt solid #000 !important;
+}
+html body h2 {
+    margin-top: 2em !important;
+    border-bottom: 1pt solid #888 !important;
+}
+html body h3 {
+    border-bottom: 1pt solid #ccc !important;
+}
+</style>
+<h1 class="mume-header" id="16%E9%80%B2%E9%9B%BB%E5%8D%93">16進電卓</h1>
+
+<p>これは <a href="https://itunes.apple.com/jp/app/16%E9%80%B2%E9%9B%BB%E5%8D%93/id335773208?mt=8">16進電卓</a> のキー入力制御に関する仕様メモです。</p>
+<h2 class="mume-header" id="1-%E7%94%BB%E9%9D%A2%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88">1. 画面レイアウト</h2>
+
+<p><img src="Screen_Shot.png" alt="16&#x9032;&#x96FB;&#x5353;&#x306E;&#x753B;&#x9762;&#x30EC;&#x30A4;&#x30A2;&#x30A6;&#x30C8;"></p>
+<h3 class="mume-header" id="11-%E3%82%AD%E3%83%BC">1.1 キー</h3>
+
+<table>
+<thead>
+<tr>
+<th><strong>キーの種類</strong></th>
+<th>キーの画面での名前</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数字キー</strong></td>
+<td><code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, <code>E</code>, <code>F</code></td>
+</tr>
+<tr>
+<td><strong>単項演算子キー</strong></td>
+<td><code>NOT</code>, <code>NEG</code></td>
+</tr>
+<tr>
+<td><strong>二項演算子キー</strong></td>
+<td><code>+</code>, <code>-</code>, <code>×</code>, <code>÷</code>, <code>MOD</code>, <code>AND</code>, <code>OR</code>, <code>XOR</code></td>
+</tr>
+<tr>
+<td><strong>結果キー</strong></td>
+<td><code>=</code></td>
+</tr>
+<tr>
+<td><strong>削除キー</strong></td>
+<td><code>DEL</code></td>
+</tr>
+<tr>
+<td><strong>クリアキー</strong></td>
+<td><code>C</code> (赤色)</td>
+</tr>
+<tr>
+<td><strong>全クリアキー</strong></td>
+<td><code>AC</code></td>
+</tr>
+</tbody>
+</table>
+<h2 class="mume-header" id="2-%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB%E5%9B%B3">2. 状態遷移図</h2>
+
+<h3 class="mume-header" id="21-%E3%82%AD%E3%83%BC%E5%85%A5%E5%8A%9B%E5%85%A8%E4%BD%93">2.1 キー入力全体</h3>
+
+<p><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="450px" preserveAspectRatio="none" style="width:884px;height:450px;" version="1.1" viewBox="0 0 884 450" width="884px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ftwvpb03hytp" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"></feBlend></filter></defs><g><rect fill="#FEFECE" filter="url(#f1ftwvpb03hytp)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="76" x="282.8234" y="135"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="282.8234" x2="358.8234" y1="161.4883" y2="161.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="292.8234" y="153.5352">初期状態</text><rect fill="#FEFECE" filter="url(#f1ftwvpb03hytp)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="99" x="531.3234" y="8"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="531.3234" x2="630.3234" y1="34.4883" y2="34.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="79" x="541.3234" y="26.5352">数値1入力中</text><rect fill="#FEFECE" filter="url(#f1ftwvpb03hytp)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="90" x="460.8234" y="135"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="460.8234" x2="550.8234" y1="161.4883" y2="161.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="70" x="470.8234" y="153.5352">数式入力中</text><rect fill="#FEFECE" filter="url(#f1ftwvpb03hytp)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="99" x="321.3234" y="262"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="321.3234" x2="420.3234" y1="288.4883" y2="288.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="79" x="331.3234" y="280.5352">数値2入力中</text><rect fill="#FEFECE" filter="url(#f1ftwvpb03hytp)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="90" x="642.8234" y="389"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="642.8234" x2="732.8234" y1="415.4883" y2="415.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="70" x="652.8234" y="407.5352">結果表示中</text><rect fill="#FEFECE" filter="url(#f1ftwvpb03hytp)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="104" x="47.8234" y="389"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="47.8234" x2="151.8234" y1="415.4883" y2="415.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="84" x="57.8234" y="407.5352">エラー表示中</text><ellipse cx="291.8234" cy="33" fill="#000000" filter="url(#f1ftwvpb03hytp)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"></ellipse><!--link *start to initial--><path d="M294.0989,42.9655 C298.3225,61.4618 307.5275,101.7732 313.9468,129.8855 " fill="none" id="*start-initial" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="315.1112,134.9847,317.0071,125.32,313.998,130.1102,309.2079,127.1011,315.1112,134.9847" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link number1 to initial--><path d="M526.1906,39.7607 C465.626,48.2805 373.0066,64.6832 346.8234,88 C333.4246,99.932 326.9269,119.302 323.778,134.9471 " fill="none" id="number1-initial" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="531.2203,39.0608,521.7549,36.3394,526.268,39.7499,522.8575,44.2631,531.2203,39.0608" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="95" x="347.8234" y="101.5684">数字,単項演算子</text><!--link number1 to initial--><path d="M534.6666,58.1107 C498.0541,78.0093 452.2954,102.8263 447.8234,105 C420.2707,118.3922 388.6606,132.0874 363.8692,142.4617 " fill="none" id="number1-initial" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="359.005,144.4912,368.8513,144.7171,363.6194,142.5658,365.7707,137.334,359.005,144.4912" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="52" x="477.8234" y="101.5684">全クリア</text><!--link initial to formula--><path d="M359.1555,160 C387.0687,160 425.1429,160 455.5029,160 " fill="none" id="initial-formula" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="460.6911,160,451.6911,156,455.6911,160,451.6911,164,460.6911,160" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="65" x="377.3234" y="153.5684">二項演算子</text><!--link formula to initial--><path d="M460.5679,175.0787 C452.7321,177.123 444.6028,178.8953 436.8234,180 C413.0617,183.3743 406.5318,183.7293 382.8234,180 C376.7133,179.0389 370.3844,177.5757 364.2089,175.8688 " fill="none" id="formula-initial" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="359.0658,174.3834,366.6024,180.7237,363.8695,175.7708,368.8223,173.0378,359.0658,174.3834" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="52" x="383.8234" y="176.5684">全クリア</text><!--link number1 to number1--><path d="M630.7178,21.4098 C649.6575,20.9628 665.3234,24.8262 665.3234,33 C665.3234,40.4075 652.4572,44.275 635.9481,44.6023 " fill="none" id="number1-number1" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="630.7178,44.5902,639.7084,48.6113,635.7178,44.6019,639.7271,40.6113,630.7178,44.5902" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="99" x="671.3234" y="30.5684">数字,単項演算子,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="69" x="686.3234" y="45.8789">削除,クリア</text><!--link number1 to formula--><path d="M567.791,58.2778 C560.4407,72.2164 550.9289,89.7402 541.8234,105 C536.84,113.3515 531.1851,122.2376 525.858,130.3768 " fill="none" id="number1-formula" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="522.9386,134.8136,531.2272,129.4939,525.687,130.6367,524.5441,125.0965,522.9386,134.8136" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="65" x="551.8234" y="101.5684">二項演算子</text><!--link number1 to result--><path d="M613.5934,58.2427 C660.1409,96.4131 743.3561,173.7931 775.8234,262 C783.4994,282.8544 783.5668,291.1706 775.8234,312 C765.2033,340.5672 742.5931,366.4808 722.9513,385.0402 " fill="none" id="number1-result" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="719.0669,388.6526,728.3814,385.4526,722.7283,385.2475,722.9333,379.5944,719.0669,388.6526" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="26" x="762.8234" y="228.5684">結果</text><!--link result to number1--><path d="M732.9429,393.0813 C748.803,384.1829 765.8788,372.674 778.8234,359 C823.2029,312.1197 821.5965,275.0179 797.8234,215 C768.4988,140.9668 689.4346,87.7666 635.2974,58.6687 " fill="none" id="result-number1" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="630.7924,56.2718,636.8591,64.0303,635.2066,58.6202,640.6166,56.9677,630.7924,56.2718" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="26" x="803.8234" y="228.5684">数字</text><!--link formula to formula--><path d="M551.0562,148.4772 C569.8728,147.6825 585.8234,151.5234 585.8234,160 C585.8234,167.6819 572.7234,171.5566 556.262,171.6241 " fill="none" id="formula-formula" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="551.0562,171.5228,559.9767,175.6972,556.0553,171.6201,560.1323,167.6987,551.0562,171.5228" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="65" x="591.8234" y="165.0684">二項演算子</text><!--link formula to number2--><path d="M463.0368,185.2263 C450.0782,193.8454 436.2609,204.0877 424.8234,215 C411.607,227.6094 399.2002,243.7173 389.6198,257.4989 " fill="none" id="formula-number2" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="386.7395,261.6948,395.1307,256.5385,389.5692,257.5726,388.5351,252.011,386.7395,261.6948" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="26" x="425.8234" y="228.5684">数字</text><!--link number2 to formula--><path d="M417.5346,261.9162 C431.0475,253.4387 445.2576,243.24 456.8234,232 C469.4879,219.6923 480.7958,203.628 489.3489,189.7969 " fill="none" id="number2-formula" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="492.1418,185.2006,484.0496,190.8145,489.5452,189.4735,490.8862,194.9691,492.1418,185.2006" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="99" x="472.8234" y="228.5684">二項演算子(正常)</text><!--link formula to result--><path d="M550.9074,167.9479 C598.717,179.2374 670.6161,205.238 694.8234,262 C711.6933,301.5572 704.2773,352.2699 696.6407,383.9546 " fill="none" id="formula-result" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="695.4169,388.8719,701.4724,381.1046,696.6246,384.02,693.7093,379.1722,695.4169,388.8719" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="60" x="706.8234" y="292.0684">結果(正常)</text><!--link result to formula--><path d="M668.9741,388.9119 C654.3934,368.798 634.3137,339.4873 619.8234,312 C598.155,270.8965 609.318,251.7024 580.8234,215 C573.0434,204.979 562.9742,195.9284 552.7539,188.1964 " fill="none" id="result-formula" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="548.6808,185.1878,553.5435,193.7525,552.7026,188.1585,558.2966,187.3176,548.6808,185.1878" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="65" x="620.8234" y="292.0684">二項演算子</text><!--link formula to error--><path d="M460.598,168.8696 C379.4542,185.5534 213.5204,223.4142 169.8234,262 C133.1877,294.3503 114.4733,349.8212 105.9471,384.0563 " fill="none" id="formula-error" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="104.7621,388.948,110.7685,381.1427,105.9392,384.0885,102.9933,379.2593,104.7621,388.948" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="60" x="170.8234" y="292.0684">結果(異常)</text><!--link number2 to initial--><path d="M347.7965,261.8327 C340.9228,252.9935 334.0904,242.6073 329.8234,232 C324.5522,218.8968 322.1719,203.4608 321.1613,190.2486 " fill="none" id="number2-initial" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="320.8277,185.1153,317.4198,194.3558,321.152,190.1048,325.403,193.8369,320.8277,185.1153" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="52" x="330.8234" y="228.5684">全クリア</text><!--link number2 to number2--><path d="M420.7178,275.4098 C439.6575,274.9628 455.3234,278.8262 455.3234,287 C455.3234,294.4075 442.4572,298.275 425.9481,298.6023 " fill="none" id="number2-number2" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="420.7178,298.5902,429.7084,302.6113,425.7178,298.6019,429.7271,294.6113,420.7178,298.5902" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="99" x="461.3234" y="284.5684">数字,単項演算子,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="69" x="476.3234" y="299.8789">削除,クリア</text><!--link number2 to result--><path d="M420.4151,310.4374 C452.0225,325.0605 494.0011,343.9046 531.8234,359 C566.8875,372.9946 607.079,387.1205 637.8843,397.552 " fill="none" id="number2-result" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="642.7456,399.1939,635.499,392.5241,638.0085,397.5938,632.9388,400.1033,642.7456,399.1939" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="60" x="532.8234" y="355.5684">結果(正常)</text><!--link number2 to error--><path d="M321.1221,309.0469 C298.9349,318.9812 272.5065,330.9419 248.8234,342 C217.9398,356.4201 183.6811,372.9379 155.808,386.5121 " fill="none" id="number2-error" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="151.0366,388.8375,160.8793,388.4904,155.5312,386.647,157.3746,381.2989,151.0366,388.8375" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="189" x="249.8234" y="355.5684">結果(エラー),二項演算子(エラー)</text><!--link result to initial--><path d="M642.5308,404.2259 C531.8191,380.2335 256.0281,319.8157 249.8234,312 C219.7177,274.0779 258.6529,221.3095 289.6565,188.9684 " fill="none" id="result-initial" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="293.3929,185.128,284.2499,188.7893,289.9062,188.7117,289.9838,194.368,293.3929,185.128" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="52" x="250.8234" y="292.0684">全クリア</text><!--link result to result--><path d="M733.0562,402.4772 C751.8728,401.6825 767.8234,405.5234 767.8234,414 C767.8234,421.6819 754.7234,425.5566 738.262,425.6241 " fill="none" id="result-result" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="733.0562,425.5228,741.9767,429.6972,738.0553,425.6201,742.1323,421.6987,733.0562,425.5228" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="99" x="773.8234" y="411.5684">結果,単項演算子,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="69" x="788.8234" y="426.8789">削除,クリア</text><!--link error to initial--><path d="M68.5338,388.9663 C33.5765,357.9187 -14.3902,303.9625 15.8234,262 C46.9488,218.771 201.1187,183.3175 277.618,168.0644 " fill="none" id="error-initial" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="282.5424,167.0891,272.9368,164.9138,277.6377,168.0605,274.491,172.7614,282.5424,167.0891" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="39" x="16.8234" y="292.0684">クリア</text><!--
+@startuml
+
+state "初期状態" as initial
+state "数値1入力中" as number1
+state "数式入力中" as formula
+state "数値2入力中" as number2
+state "結果表示中" as result
+state "エラー表示中" as error
+
+[*] - -> initial
+
+initial -left-> number1: 数字,単項演算子
+initial -> formula: 二項演算子
+
+number1 -> initial: 全クリア
+number1 -> number1: 数字,単項演算子,\n削除,クリア
+number1 - -> formula: 二項演算子
+number1 - -> result: 結果
+
+formula -> initial: 全クリア
+formula -> formula: 二項演算子
+formula - -> number2: 数字
+formula -right-> result: 結果(正常)
+formula - -> error: 結果(異常)
+
+number2 -> initial: 全クリア
+number2 -> number2: 数字,単項演算子,\n削除,クリア
+number2 - -> result: 結果(正常)
+number2 - -> formula: 二項演算子(正常)
+number2 - -> error: 結果(エラー),二項演算子(エラー)
+
+result -> initial: 全クリア
+result -> result: 結果,単項演算子,\n削除,クリア
+result - -> number1: 数字
+result - -> formula: 二項演算子
+
+error -right-> initial: クリア
+
+@enduml
+
+PlantUML version 1.2018.01(Mon Jan 29 03:08:22 JST 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.7.0_71-b14
+Operating System: Mac OS X
+OS Version: 10.13.4
+Default Encoding: UTF-8
+Language: ja
+Country: JP
+--></g></svg></p><h3 class="mume-header" id="22-%E3%82%AF%E3%83%AA%E3%82%A2%E3%82%AD%E3%83%BC">2.2 クリアキー</h3>
+
+<p><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="150px" preserveAspectRatio="none" style="width:261px;height:150px;" version="1.1" viewBox="0 0 261 150" width="261px" zoomAndPan="magnify"><defs><filter height="300%" id="f1n5f5qgu8yply" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"></feBlend></filter></defs><g><rect fill="#FEFECE" filter="url(#f1n5f5qgu8yply)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="82" x="6" y="89"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="6" x2="88" y1="115.4883" y2="115.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="16" y="107.5352">ACモード</text><rect fill="#FEFECE" filter="url(#f1n5f5qgu8yply)" height="50" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="72" x="177" y="89"></rect><line style="stroke: #A80036; stroke-width: 1.5;" x1="177" x2="249" y1="115.4883" y2="115.4883"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="187" y="107.5352">Cモード</text><ellipse cx="47" cy="18" fill="#000000" filter="url(#f1n5f5qgu8yply)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"></ellipse><!--link *start to ac_mode--><path d="M47,28.2737 C47,41.3608 47,64.5555 47,83.5207 " fill="none" id="*start-ac_mode" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="47,88.7458,51,79.7458,47,83.7458,43,79.7458,47,88.7458" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link ac_mode to c_mode--><path d="M88.4642,128.8482 C106.2573,133.5252 127.3246,136.8211 146.5,134 C154.7971,132.7793 163.4952,130.7453 171.7638,128.4301 " fill="none" id="ac_mode-c_mode" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="176.8492,126.957,167.0916,125.6193,172.0467,128.3483,169.3177,133.3033,176.8492,126.957" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="26" x="119.5" y="130.5684">数字</text><!--link c_mode to ac_mode--><path d="M176.9485,114 C152.4041,114 119.6978,114 93.2381,114 " fill="none" id="c_mode-ac_mode" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="88.0337,114,97.0337,118,93.0337,114,97.0337,110,88.0337,114" style="stroke: #A80036; stroke-width: 1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="52" x="106.5" y="107.5684">&#8;全クリア</text><!--
+@startuml
+
+state "ACモード" as ac_mode
+state "Cモード" as c_mode
+
+[*] - -> ac_mode
+ac_mode -> c_mode: 数字
+c_mode -> ac_mode: 全クリア
+
+@enduml
+
+PlantUML version 1.2018.01(Mon Jan 29 03:08:22 JST 2018)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.7.0_71-b14
+Operating System: Mac OS X
+OS Version: 10.13.4
+Default Encoding: UTF-8
+Language: ja
+Country: JP
+--></g></svg></p><h2 class="mume-header" id="3-%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB%E8%A1%A8">3. 状態遷移表</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>数字キー</strong></th>
+<th><strong>単項演算子キー</strong></th>
+<th><strong>二項演算子キー</strong></th>
+<th><strong>結果キー</strong></th>
+<th><strong>削除キー</strong></th>
+<th><strong>クリアキー</strong></th>
+<th><strong>全クリアキー</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>初期状態</strong></td>
+<td>数値1=入力数字<br>→<strong>数値1入力中へ</strong></td>
+<td>数値1=入力演算子(数値1)<br>→<strong>数値1入力中へ</strong></td>
+<td>数値1=0<br>最終演算子=入力演算子<br>→<strong>数式入力中へ</strong></td>
+<td>無視</td>
+<td>無視</td>
+<td>無視</td>
+<td>無視</td>
+</tr>
+<tr>
+<td><strong>数値1入力中</strong></td>
+<td>数値1=数値1×基数+入力数字</td>
+<td>数値1=入力演算子(数値1)</td>
+<td>最終演算子=入力演算子<br>→<strong>数式入力中へ</strong></td>
+<td>数値1=最終演算子(数値1,数値2)<br>成功の時: →<strong>結果表示中へ</strong><br>失敗の時: →<strong>エラー表示中へ</strong></td>
+<td>数値1=数値1÷基数</td>
+<td>数値1=0</td>
+<td>数値1=0<br>数値2=0<br>→<strong>初期状態へ</strong></td>
+</tr>
+<tr>
+<td><strong>数式入力中</strong></td>
+<td>数値2=入力数字<br>→<strong>数値2入力中へ</strong></td>
+<td>数値1=入力演算子(数値1)<br>→<strong>数値1入力中へ</strong></td>
+<td>最終演算子=入力演算子</td>
+<td>数値1=最終演算子(数値1,数値2)<br>成功の時: →<strong>結果表示中へ</strong><br>失敗の時: →<strong>エラー表示中へ</strong></td>
+<td>数値1=数値1÷基数</td>
+<td>数値1=0</td>
+<td>数値1=0<br>数値2=0<br>→<strong>初期状態へ</strong></td>
+</tr>
+<tr>
+<td><strong>数値2入力中</strong></td>
+<td>数値2=数値2×基数+入力数字</td>
+<td>数値2=入力演算子(数値2)</td>
+<td>数値1=最終演算子(数値1,数値2)<br>最終演算子=入力演算子<br>成功の時: →<strong>数式入力中へ</strong><br>失敗の時: →<strong>エラー表示中へ</strong></td>
+<td>数値1=最終演算子(数値1,数値2)<br>成功の時: →<strong>結果表示中へ</strong><br>失敗の時: →<strong>エラー表示中へ</strong></td>
+<td>数値2=数値2÷基数</td>
+<td>数値2=0</td>
+<td>数値1=0<br>数値2=0<br>→<strong>初期状態へ</strong></td>
+</tr>
+<tr>
+<td><strong>結果表示中</strong></td>
+<td>数値1=入力数字<br>→<strong>数値1入力中へ</strong></td>
+<td>数値1=入力演算子(数値1)<br>→<strong>数値1入力中へ</strong></td>
+<td>最終演算子=入力演算子<br>→<strong>数式入力中へ</strong></td>
+<td>数値1=最終演算子(数値1,数値2)<br>成功の時: →<strong>結果表示中へ</strong><br>失敗の時: →<strong>エラー表示中へ</strong></td>
+<td>数値1=数値1÷基数</td>
+<td>数値1=0</td>
+<td>数値1=0<br>数値2=0<br>→<strong>初期状態へ</strong></td>
+</tr>
+<tr>
+<td><strong>エラー表示中</strong></td>
+<td>無視</td>
+<td>無視</td>
+<td>無視</td>
+<td>無視</td>
+<td>無視</td>
+<td>数値1=0<br>数値2=0<br>→<strong>初期状態へ</strong></td>
+<td>数値1=0<br>数値2=0<br>→<strong>初期状態へ</strong></td>
+</tr>
+</tbody>
+</table>
+<p>以上</p>
+<hr>
+<p>2018-05-19 H.Ishiura</p>
+
+      </div>
+      
+      
+    </body>
+    
+    
+    
+    
+    
+    
+    
+  </html>
