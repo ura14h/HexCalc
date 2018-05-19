@@ -5,4 +5,4 @@
 - [HTML版](HexCalc_Specification.html)
 - [Markdown版](HexCalc_Specification.md)
 
-HTML版を github.io ですぐに [プレビュー](https://ura14h.github.io/HexCalc/)
+HTML版を github.io ですぐに [プレビュー](https://ura14h.github.io/HexCalc/HexCalc_Specification.html)
